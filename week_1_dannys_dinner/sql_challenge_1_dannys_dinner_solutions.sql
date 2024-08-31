@@ -1,10 +1,12 @@
 # 1 What is the total amount each customer spent at the restaurant?
 
+#method 1 
 select customer_id, sum(price) as total_amount
 from sales s
 join menu m on m.product_id=s.product_id
 group by customer_id;
 
+#method 2
 select distinct customer_id,
 	sum(price) over(partition by customer_id) as total_amount
 from sales s
@@ -84,7 +86,7 @@ select
 join menu m on m.product_id=s.product_id
 join members me on me.customer_id=s.customer_id
 where order_date < me.join_date
-) select * from cte1 where drnk=1;
+) select * from cte1 where drnk=1;	
 
 
 # 8 What is the total items and amount spent for each member before they became a member?
